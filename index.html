@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,20 +75,194 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Welcome To<br>
-                <span class="college-name">Sri Kumaran<br>Children's Home</span>
-            </h1>
-            <p class="hero-subtitle">Lead Kindly Light</p>
+    <!-- Homepage Slideshow Container -->
+    <div class="slideshow-container">
+        <!-- Slide 1: Hero -->
+        <div class="slide active" id="slide-1">
+            <div class="slide-background hero-bg"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content hero-content">
+                <h1 class="hero-title">
+                    Welcome To<br>
+                    <span class="college-name">Sri Kumaran<br>Children's Home</span>
+                </h1>
+                <p class="hero-subtitle">Lead Kindly Light</p>
+                <button class="cta-button" onclick="nextSlide()">Learn More</button>
+            </div>
         </div>
-    </section>
 
-    <!-- Content Sections -->
-    <main class="main-content">
+        <!-- Slide 2: Growth Story -->
+        <div class="slide" id="slide-2">
+            <div class="slide-background timeline-bg"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Our Growth Story</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">1985</div>
+                        <div class="timeline-content">Foundation of SKCHEC</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2000</div>
+                        <div class="timeline-content">Introduction of Science Stream</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2009</div>
+                        <div class="timeline-content">State Board Affiliation</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2015</div>
+                        <div class="timeline-content">Modern Campus Expansion</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-content">Excellence in Education</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: School Values -->
+        <div class="slide" id="slide-3">
+            <div class="slide-background values-bg"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Our Core Values</h2>
+                <div class="values-grid">
+                    <div class="value-item">
+                        <div class="value-icon">🤝</div>
+                        <h3>Sincerity</h3>
+                        <p>Honest and genuine approach in all endeavors</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">❤️</div>
+                        <h3>Kinship</h3>
+                        <p>Building strong bonds within our community</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">⚡</div>
+                        <h3>Commitment</h3>
+                        <p>Dedicated to excellence in education</p>
+                    </div>
+                    <div class="value-item">
+                        <div class="value-icon">🕊️</div>
+                        <h3>Harmony</h3>
+                        <p>Creating a peaceful learning environment</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Campus Highlights -->
+        <div class="slide" id="slide-4">
+            <div class="slide-background highlights-bg"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Campus Highlights</h2>
+                <div class="highlights-grid">
+                    <div class="highlight-card">
+                        <div class="highlight-image"></div>
+                        <div class="highlight-content">
+                            <h3>Annual Sports Day</h3>
+                            <p class="highlight-date">March 15, 2024</p>
+                            <p>Students showcased their athletic prowess in various sports events</p>
+                        </div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-image"></div>
+                        <div class="highlight-content">
+                            <h3>Science Exhibition</h3>
+                            <p class="highlight-date">February 28, 2024</p>
+                            <p>Innovative projects and experiments displayed by our students</p>
+                        </div>
+                    </div>
+                    <div class="highlight-card">
+                        <div class="highlight-image"></div>
+                        <div class="highlight-content">
+                            <h3>Cultural Festival</h3>
+                            <p class="highlight-date">January 20, 2024</p>
+                            <p>Celebrating diversity through music, dance, and art</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Campus Glimpse -->
+        <div class="slide" id="slide-5">
+            <div class="slide-background campus-bg"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Glimpse of Our Campus</h2>
+                <div class="campus-grid">
+                    <div class="campus-photo">
+                        <div class="photo-placeholder">Main Building</div>
+                    </div>
+                    <div class="campus-photo">
+                        <div class="photo-placeholder">Science Labs</div>
+                    </div>
+                    <div class="campus-photo">
+                        <div class="photo-placeholder">Library</div>
+                    </div>
+                    <div class="campus-photo">
+                        <div class="photo-placeholder">Sports Complex</div>
+                    </div>
+                    <div class="campus-photo">
+                        <div class="photo-placeholder">Auditorium</div>
+                    </div>
+                    <div class="campus-photo">
+                        <div class="photo-placeholder">Garden Area</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Stats Section -->
+        <div class="slide" id="slide-6">
+            <div class="slide-background stats-bg"></div>
+            <div class="slide-overlay"></div>
+            <div class="slide-content">
+                <h2 class="slide-title">Our Achievements</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="50">0</div>
+                        <div class="stat-label">Dedicated Educators</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1200">0</div>
+                        <div class="stat-label">Active Students</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="300">0</div>
+                        <div class="stat-label">New Admissions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="98">0</div>
+                        <div class="stat-label">Success Rate %</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="slide-controls">
+            <button class="slide-nav prev" onclick="prevSlide()">❮</button>
+            <button class="slide-nav next" onclick="nextSlide()">❯</button>
+        </div>
+
+        <!-- Slide Indicators -->
+        <div class="slide-indicators">
+            <span class="indicator active" onclick="currentSlide(1)"></span>
+            <span class="indicator" onclick="currentSlide(2)"></span>
+            <span class="indicator" onclick="currentSlide(3)"></span>
+            <span class="indicator" onclick="currentSlide(4)"></span>
+            <span class="indicator" onclick="currentSlide(5)"></span>
+            <span class="indicator" onclick="currentSlide(6)"></span>
+        </div>
+    </div>
+
+    <!-- Content Sections (Hidden by default, shown when nav items are clicked) -->
+    <main class="main-content" style="display: none;">
         <!-- About Us Sections -->
         <section id="brief-history" class="content-section">
             <div class="container">

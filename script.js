@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile menu toggle
     const hamburger = document.querySelector('.hamburger');
@@ -18,6 +19,14 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
+            
+            // Hide slideshow and show main content for page navigation
+            const slideshowContainer = document.querySelector('.slideshow-container');
+            const mainContent = document.querySelector('.main-content');
+            
+            slideshowContainer.style.display = 'none';
+            mainContent.style.display = 'block';
+            
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const headerOffset = 120; // Account for sticky banner and navbar
@@ -63,12 +72,21 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Contact form submission
-    const contactForm = document.querySelector('.contact-form form');
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will get back to you soon.');
-            this.reset();
+    const contactForms = document.querySelectorAll('.contact-form form, .admission-form');
+    if (contactForms) {
+        contactForms.forEach(form => {
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show success message based on form type
+                if (form.classList.contains('admission-form')) {
+                    alert('Your application has been submitted successfully! We will contact you soon.');
+                } else {
+                    alert('Thank you for your message! We will get back to you soon.');
+                }
+                
+                this.reset();
+            });
         });
     }
 
@@ -127,6 +145,20 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('load', function() {
         document.body.style.transition = 'opacity 0.5s ease-in-out';
         document.body.style.opacity = '1';
+    });
+
+    // Logo click returns to slideshow
+    document.querySelector('.nav-logo').addEventListener('click', function() {
+        const slideshowContainer = document.querySelector('.slideshow-container');
+        const mainContent = document.querySelector('.main-content');
+        
+        slideshowContainer.style.display = 'block';
+        mainContent.style.display = 'none';
+        
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 });
 
@@ -198,12 +230,17 @@ function currentSlide(index) {
 let slideInterval = setInterval(nextSlide, 8000);
 
 // Pause auto-advance on hover
-document.querySelector('.slideshow-container').addEventListener('mouseenter', () => {
-    clearInterval(slideInterval);
-});
+document.addEventListener('DOMContentLoaded', function() {
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    if (slideshowContainer) {
+        slideshowContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
 
-document.querySelector('.slideshow-container').addEventListener('mouseleave', () => {
-    slideInterval = setInterval(nextSlide, 8000);
+        slideshowContainer.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 8000);
+        });
+    }
 });
 
 // Keyboard navigation
@@ -238,75 +275,36 @@ function animateStats() {
 // Initialize slideshow
 document.addEventListener('DOMContentLoaded', function() {
     // Show first slide
-    showSlide(0);
+    if (slides.length > 0) {
+        showSlide(0);
+    }
     
-    // Enhanced navigation functionality
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-            if (this.getAttribute('href') === '#') {
-                e.preventDefault();
-                return;
-            }
-            
-            // Hide slideshow and show content sections
-            const slideshowContainer = document.querySelector('.slideshow-container');
-            const mainContent = document.querySelector('.main-content');
-            
-            slideshowContainer.style.display = 'none';
-            mainContent.style.display = 'block';
-            
-            // Smooth scroll to target section
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerOffset = 120;
-                const elementPosition = target.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
 
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
+    const slideshowContainer = document.querySelector('.slideshow-container');
+    if (slideshowContainer) {
+        slideshowContainer.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
         });
-    });
 
-    // Logo click returns to slideshow
-    document.querySelector('.nav-logo').addEventListener('click', function() {
-        const slideshowContainer = document.querySelector('.slideshow-container');
-        const mainContent = document.querySelector('.main-content');
-        
-        slideshowContainer.style.display = 'block';
-        mainContent.style.display = 'none';
-        
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+        slideshowContainer.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
         });
-    });
-});
+    }
 
-// Touch/swipe support for mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-document.querySelector('.slideshow-container').addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-});
-
-document.querySelector('.slideshow-container').addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
-});
-
-function handleSwipe() {
-    const swipeThreshold = 50;
-    const swipeDistance = touchEndX - touchStartX;
-    
-    if (Math.abs(swipeDistance) > swipeThreshold) {
-        if (swipeDistance > 0) {
-            prevSlide();
-        } else {
-            nextSlide();
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchEndX - touchStartX;
+        
+        if (Math.abs(swipeDistance) > swipeThreshold) {
+            if (swipeDistance > 0) {
+                prevSlide();
+            } else {
+                nextSlide();
+            }
         }
     }
-}
+});

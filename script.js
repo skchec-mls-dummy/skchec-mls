@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
-                const headerOffset = 80;
+                const headerOffset = 120; // Account for sticky banner and navbar
                 const elementPosition = target.offsetTop;
                 const offsetPosition = elementPosition - headerOffset;
 
@@ -41,8 +41,26 @@ document.addEventListener('DOMContentLoaded', function() {
             navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         } else {
             navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            navbar.style.boxShadow = 'none';
+            navbar.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
         }
+    });
+
+    // Back to top button functionality
+    const backToTopButton = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add('visible');
+        } else {
+            backToTopButton.classList.remove('visible');
+        }
+    });
+
+    backToTopButton.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 
     // Contact form submission
@@ -55,24 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Learn More button functionality
-    const ctaButton = document.querySelector('.cta-button');
-    if (ctaButton) {
-        ctaButton.addEventListener('click', function() {
-            const aboutSection = document.querySelector('#brief-history');
-            if (aboutSection) {
-                const headerOffset = 80;
-                const elementPosition = aboutSection.offsetTop;
-                const offsetPosition = elementPosition - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    }
-
     // Add animation to elements when they come into view
     const observerOptions = {
         threshold: 0.1,
@@ -82,17 +82,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('visible');
             }
         });
     }, observerOptions);
 
-    // Observe all content sections
+    // Observe all content sections for smooth transitions
     document.querySelectorAll('.content-section').forEach(section => {
-        section.style.opacity = '0';
-        section.style.transform = 'translateY(20px)';
-        section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(section);
     });
 
@@ -107,19 +103,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add click handlers for dropdown menu items (for demo purposes)
+    // Add click handlers for dropdown menu items
     document.querySelectorAll('.dropdown-content a').forEach(link => {
         link.addEventListener('click', function(e) {
             if (!this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
                 console.log('Navigate to:', this.textContent);
-                // In a real application, you would navigate to the actual page
             }
         });
     });
+
+    // Parallax effect for hero background
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        if (hero) {
+            const rate = scrolled * -0.5;
+            hero.style.transform = `translateY(${rate}px)`;
+        }
+    });
+
+    // Add page transition effects
+    document.body.style.opacity = '0';
+    window.addEventListener('load', function() {
+        document.body.style.transition = 'opacity 0.5s ease-in-out';
+        document.body.style.opacity = '1';
+    });
 });
 
-// Add some interactive effects
+// Enhanced interactive effects
 document.addEventListener('mousemove', function(e) {
     const hero = document.querySelector('.hero');
     if (hero) {
@@ -131,7 +143,7 @@ document.addEventListener('mousemove', function(e) {
             const xPercent = (x / rect.width) * 100;
             const yPercent = (y / rect.height) * 100;
             
-            hero.style.backgroundPosition = `${50 + (xPercent - 50) * 0.1}% ${50 + (yPercent - 50) * 0.1}%`;
+            hero.style.backgroundPosition = `${50 + (xPercent - 50) * 0.05}% ${50 + (yPercent - 50) * 0.05}%`;
         }
     }
 });

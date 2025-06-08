@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { BriefHistory, MissionVision, PrincipalWelcome, FacultyStaff } from '../components/AboutPages';
@@ -18,29 +17,20 @@ const HomePage = () => {
       background: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3'
     },
     {
-      id: 'growth',
-      title: 'Our Growth Story',
-      content: 'timeline'
+      id: 'campus1',
+      background: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3'
     },
     {
-      id: 'values',
-      title: 'Our Core Values',
-      content: 'values'
+      id: 'campus2', 
+      background: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3'
     },
     {
-      id: 'highlights',
-      title: 'Campus Highlights',
-      content: 'highlights'
+      id: 'campus3',
+      background: 'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3'
     },
     {
-      id: 'gallery',
-      title: 'Campus Gallery',
-      content: 'gallery'
-    },
-    {
-      id: 'stats',
-      title: 'Our Achievements',
-      content: 'stats'
+      id: 'campus4',
+      background: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3'
     }
   ];
 
@@ -58,7 +48,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen">
-      {/* Hero/Slideshow Section */}
+      {/* Hero Carousel Section */}
       <div className="relative h-screen overflow-hidden">
         {slides.map((slide, index) => (
           <div
@@ -67,13 +57,13 @@ const HomePage = () => {
               index === currentSlide ? 'translate-x-0' : index < currentSlide ? '-translate-x-full' : 'translate-x-full'
             }`}
           >
-            {slide.id === 'hero' && (
-              <div className="relative h-full">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center"
-                  style={{ backgroundImage: `url(${slide.background})` }}
-                />
-                <div className="absolute inset-0 bg-black/50" />
+            <div className="relative h-full">
+              <div 
+                className="absolute inset-0 bg-cover bg-center"
+                style={{ backgroundImage: `url(${slide.background})` }}
+              />
+              <div className="absolute inset-0 bg-black/50" />
+              {slide.id === 'hero' && (
                 <div className="relative z-10 flex items-center justify-center h-full text-white text-center">
                   <div>
                     <h1 className="text-5xl md:text-7xl font-bold mb-4">{slide.title}</h1>
@@ -82,131 +72,12 @@ const HomePage = () => {
                       onClick={nextSlide}
                       className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3 rounded-lg text-lg font-semibold transition-colors"
                     >
-                      Learn More
+                      Explore Our Campus
                     </button>
                   </div>
                 </div>
-              </div>
-            )}
-
-            {slide.id === 'growth' && (
-              <div className="h-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center p-8">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-4xl font-bold text-center mb-12">{slide.title}</h2>
-                  <div className="grid md:grid-cols-5 gap-8">
-                    {[
-                      { year: '1985', milestone: 'Foundation of SKCHEC' },
-                      { year: '2000', milestone: 'Introduction of Science Stream' },
-                      { year: '2009', milestone: 'State Board Affiliation' },
-                      { year: '2015', milestone: 'Modern Campus Expansion' },
-                      { year: '2024', milestone: 'Excellence in Education' }
-                    ].map((item, i) => (
-                      <div key={i} className="text-center">
-                        <div className="bg-primary text-primary-foreground rounded-full w-16 h-16 flex items-center justify-center font-bold text-lg mx-auto mb-4">
-                          {item.year}
-                        </div>
-                        <p className="font-medium">{item.milestone}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {slide.id === 'values' && (
-              <div className="h-full bg-gradient-to-br from-secondary/20 to-accent/20 flex items-center justify-center p-8">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-4xl font-bold text-center mb-12">{slide.title}</h2>
-                  <div className="grid md:grid-cols-4 gap-8">
-                    {[
-                      { icon: '🤝', title: 'Sincerity', description: 'Honest and genuine approach in all endeavors' },
-                      { icon: '❤️', title: 'Kinship', description: 'Building strong bonds within our community' },
-                      { icon: '⚡', title: 'Commitment', description: 'Dedicated to excellence in education' },
-                      { icon: '🕊️', title: 'Harmony', description: 'Creating a peaceful learning environment' }
-                    ].map((value, i) => (
-                      <div key={i} className="text-center bg-card p-6 rounded-lg shadow-lg">
-                        <div className="text-4xl mb-4">{value.icon}</div>
-                        <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
-                        <p className="text-muted-foreground">{value.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {slide.id === 'highlights' && (
-              <div className="h-full bg-gradient-to-br from-accent/20 to-primary/20 flex items-center justify-center p-8">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-4xl font-bold text-center mb-12">{slide.title}</h2>
-                  <div className="grid md:grid-cols-3 gap-8">
-                    {[
-                      { title: 'Annual Sports Day', date: 'March 15, 2024', description: 'Students showcased their athletic prowess', image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3' },
-                      { title: 'Science Exhibition', date: 'February 28, 2024', description: 'Innovative projects and experiments', image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3' },
-                      { title: 'Cultural Festival', date: 'January 20, 2024', description: 'Celebrating diversity through arts', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3' }
-                    ].map((event, i) => (
-                      <div key={i} className="bg-card rounded-lg shadow-lg overflow-hidden">
-                        <div 
-                          className="h-48 bg-cover bg-center"
-                          style={{ backgroundImage: `url(${event.image})` }}
-                        />
-                        <div className="p-6">
-                          <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
-                          <p className="text-primary font-medium mb-2">{event.date}</p>
-                          <p className="text-muted-foreground">{event.description}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {slide.id === 'gallery' && (
-              <div className="h-full bg-gradient-to-br from-muted/20 to-secondary/20 flex items-center justify-center p-8">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-4xl font-bold text-center mb-12">{slide.title}</h2>
-                  <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
-                    {[
-                      'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3',
-                      'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3',
-                      'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3',
-                      'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3',
-                      'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3',
-                      'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3'
-                    ].map((image, i) => (
-                      <div key={i} className="aspect-square rounded-lg overflow-hidden shadow-md">
-                        <div 
-                          className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-300"
-                          style={{ backgroundImage: `url(${image})` }}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {slide.id === 'stats' && (
-              <div className="h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center p-8">
-                <div className="max-w-6xl mx-auto">
-                  <h2 className="text-4xl font-bold text-center mb-12">{slide.title}</h2>
-                  <div className="grid md:grid-cols-4 gap-8 text-center">
-                    {[
-                      { number: '50+', label: 'Dedicated Educators' },
-                      { number: '1200+', label: 'Active Students' },
-                      { number: '300+', label: 'New Admissions' },
-                      { number: '98%', label: 'Success Rate' }
-                    ].map((stat, i) => (
-                      <div key={i} className="bg-card p-8 rounded-lg shadow-lg">
-                        <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
-                        <div className="text-lg font-medium">{stat.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         ))}
 
@@ -236,6 +107,134 @@ const HomePage = () => {
             />
           ))}
         </div>
+      </div>
+
+      {/* Content Sections Below Hero */}
+      <div className="bg-background">
+        {/* Growth Story Section */}
+        <section className="py-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Our Growth Story</h2>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-5 gap-8">
+                {[
+                  { year: '1985', milestone: 'Foundation of SKCHEC' },
+                  { year: '2000', milestone: 'Introduction of Science Stream' },
+                  { year: '2009', milestone: 'State Board Affiliation' },
+                  { year: '2015', milestone: 'Modern Campus Expansion' },
+                  { year: '2024', milestone: 'Excellence in Education' }
+                ].map((item, i) => (
+                  <div key={i} className="text-center">
+                    <div className="bg-primary text-primary-foreground rounded-full w-16 h-16 flex items-center justify-center font-bold text-lg mx-auto mb-4">
+                      {item.year}
+                    </div>
+                    <p className="font-medium">{item.milestone}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* School Values Section */}
+        <section className="py-16 bg-gradient-to-br from-secondary/10 to-accent/10">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Our Core Values - S.K.C.H</h2>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-4 gap-8">
+                {[
+                  { letter: 'S', title: 'Sincerity', description: 'Honest and genuine approach in all endeavors', icon: '🤝' },
+                  { letter: 'K', title: 'Kinship', description: 'Building strong bonds within our community', icon: '❤️' },
+                  { letter: 'C', title: 'Commitment', description: 'Dedicated to excellence in education', icon: '⚡' },
+                  { letter: 'H', title: 'Harmony', description: 'Creating a peaceful learning environment', icon: '🕊️' }
+                ].map((value, i) => (
+                  <div key={i} className="text-center bg-card p-6 rounded-lg shadow-lg">
+                    <div className="text-4xl mb-4">{value.icon}</div>
+                    <div className="text-3xl font-bold text-primary mb-2">{value.letter}</div>
+                    <h3 className="text-xl font-semibold mb-3">{value.title}</h3>
+                    <p className="text-muted-foreground">{value.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Campus Highlights Section */}
+        <section className="py-16 bg-gradient-to-br from-accent/10 to-primary/10">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Campus Highlights</h2>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-8">
+                {[
+                  { title: 'Annual Sports Day', date: 'March 15, 2024', description: 'Students showcased their athletic prowess', image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3' },
+                  { title: 'Science Exhibition', date: 'February 28, 2024', description: 'Innovative projects and experiments', image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3' },
+                  { title: 'Cultural Festival', date: 'January 20, 2024', description: 'Celebrating diversity through arts', image: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-4.0.3' }
+                ].map((event, i) => (
+                  <div key={i} className="bg-card rounded-lg shadow-lg overflow-hidden">
+                    <div 
+                      className="h-48 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${event.image})` }}
+                    />
+                    <div className="p-6">
+                      <h3 className="text-xl font-semibold mb-2">{event.title}</h3>
+                      <p className="text-primary font-medium mb-2">{event.date}</p>
+                      <p className="text-muted-foreground">{event.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Campus Gallery Section */}
+        <section className="py-16 bg-gradient-to-br from-muted/10 to-secondary/10">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Campus Gallery</h2>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {[
+                  'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3',
+                  'https://images.unsplash.com/photo-1580582932707-520aed937b7b?ixlib=rb-4.0.3',
+                  'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?ixlib=rb-4.0.3',
+                  'https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3',
+                  'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3',
+                  'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3'
+                ].map((image, i) => (
+                  <div key={i} className="aspect-square rounded-lg overflow-hidden shadow-md">
+                    <div 
+                      className="w-full h-full bg-cover bg-center hover:scale-105 transition-transform duration-300"
+                      style={{ backgroundImage: `url(${image})` }}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* School Stats Section */}
+        <section className="py-16 bg-gradient-to-br from-primary/10 to-accent/10">
+          <div className="container mx-auto px-4">
+            <h2 className="text-4xl font-bold text-center mb-12">Our Achievements</h2>
+            <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-4 gap-8 text-center">
+                {[
+                  { number: '50+', label: 'Dedicated Educators' },
+                  { number: '1200+', label: 'Active Students' },
+                  { number: '300+', label: 'New Admissions' },
+                  { number: '98%', label: 'Success Rate' }
+                ].map((stat, i) => (
+                  <div key={i} className="bg-card p-8 rounded-lg shadow-lg">
+                    <div className="text-4xl font-bold text-primary mb-2">{stat.number}</div>
+                    <div className="text-lg font-medium">{stat.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

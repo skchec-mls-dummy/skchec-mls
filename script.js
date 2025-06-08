@@ -19,14 +19,6 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            
-            // Hide slideshow and show main content for page navigation
-            const slideshowContainer = document.querySelector('.slideshow-container');
-            const mainContent = document.querySelector('.main-content');
-            
-            slideshowContainer.style.display = 'none';
-            mainContent.style.display = 'block';
-            
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 const headerOffset = 120; // Account for sticky banner and navbar
@@ -72,21 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Contact form submission
-    const contactForms = document.querySelectorAll('.contact-form form, .admission-form');
-    if (contactForms) {
-        contactForms.forEach(form => {
-            form.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Show success message based on form type
-                if (form.classList.contains('admission-form')) {
-                    alert('Your application has been submitted successfully! We will contact you soon.');
-                } else {
-                    alert('Thank you for your message! We will get back to you soon.');
-                }
-                
-                this.reset();
-            });
+    const contactForm = document.querySelector('.contact-form form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
         });
     }
 
@@ -146,20 +129,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.style.transition = 'opacity 0.5s ease-in-out';
         document.body.style.opacity = '1';
     });
-
-    // Logo click returns to slideshow
-    document.querySelector('.nav-logo').addEventListener('click', function() {
-        const slideshowContainer = document.querySelector('.slideshow-container');
-        const mainContent = document.querySelector('.main-content');
-        
-        slideshowContainer.style.display = 'block';
-        mainContent.style.display = 'none';
-        
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
 });
 
 // Enhanced interactive effects
@@ -175,136 +144,6 @@ document.addEventListener('mousemove', function(e) {
             const yPercent = (y / rect.height) * 100;
             
             hero.style.backgroundPosition = `${50 + (xPercent - 50) * 0.05}% ${50 + (yPercent - 50) * 0.05}%`;
-        }
-    }
-});
-
-// Slideshow functionality
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const indicators = document.querySelectorAll('.indicator');
-const totalSlides = slides.length;
-
-function showSlide(index) {
-    // Remove active class from all slides and indicators
-    slides.forEach(slide => {
-        slide.classList.remove('active', 'prev');
-    });
-    indicators.forEach(indicator => {
-        indicator.classList.remove('active');
-    });
-
-    // Add active class to current slide and indicator
-    slides[index].classList.add('active');
-    indicators[index].classList.add('active');
-
-    // Add prev class to previous slide for smooth transition
-    const prevIndex = currentSlideIndex;
-    if (prevIndex !== index) {
-        slides[prevIndex].classList.add('prev');
-    }
-
-    currentSlideIndex = index;
-
-    // Animate stats if on stats slide
-    if (index === 5) {
-        animateStats();
-    }
-}
-
-function nextSlide() {
-    const nextIndex = (currentSlideIndex + 1) % totalSlides;
-    showSlide(nextIndex);
-}
-
-function prevSlide() {
-    const prevIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
-    showSlide(prevIndex);
-}
-
-function currentSlide(index) {
-    showSlide(index - 1);
-}
-
-// Auto-advance slides every 8 seconds
-let slideInterval = setInterval(nextSlide, 8000);
-
-// Pause auto-advance on hover
-document.addEventListener('DOMContentLoaded', function() {
-    const slideshowContainer = document.querySelector('.slideshow-container');
-    if (slideshowContainer) {
-        slideshowContainer.addEventListener('mouseenter', () => {
-            clearInterval(slideInterval);
-        });
-
-        slideshowContainer.addEventListener('mouseleave', () => {
-            slideInterval = setInterval(nextSlide, 8000);
-        });
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') {
-        prevSlide();
-    } else if (e.key === 'ArrowRight') {
-        nextSlide();
-    }
-});
-
-// Animate stats numbers
-function animateStats() {
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    statNumbers.forEach(stat => {
-        const target = parseInt(stat.getAttribute('data-target'));
-        const increment = target / 50;
-        let current = 0;
-        
-        const timer = setInterval(() => {
-            current += increment;
-            if (current >= target) {
-                current = target;
-                clearInterval(timer);
-            }
-            stat.textContent = Math.floor(current);
-        }, 40);
-    });
-}
-
-// Initialize slideshow
-document.addEventListener('DOMContentLoaded', function() {
-    // Show first slide
-    if (slides.length > 0) {
-        showSlide(0);
-    }
-    
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-
-    const slideshowContainer = document.querySelector('.slideshow-container');
-    if (slideshowContainer) {
-        slideshowContainer.addEventListener('touchstart', (e) => {
-            touchStartX = e.changedTouches[0].screenX;
-        });
-
-        slideshowContainer.addEventListener('touchend', (e) => {
-            touchEndX = e.changedTouches[0].screenX;
-            handleSwipe();
-        });
-    }
-
-    function handleSwipe() {
-        const swipeThreshold = 50;
-        const swipeDistance = touchEndX - touchStartX;
-        
-        if (Math.abs(swipeDistance) > swipeThreshold) {
-            if (swipeDistance > 0) {
-                prevSlide();
-            } else {
-                nextSlide();
-            }
         }
     }
 });
